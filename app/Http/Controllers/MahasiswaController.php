@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
 use App\Http\Resources\MahasiswaResource;
 use App\Http\Requests\StoreMahasiswaRequests;
+use App\Http\Requests\UpdateMahasiswaRequest;
 
 class MahasiswaController extends Controller
 {
@@ -47,12 +48,12 @@ class MahasiswaController extends Controller
             [
                 'Nim'=>$request->Nim,
                 'Nama'=>$request->Nama,
-                'Foto'=>$request->Foto,
-                'kelas_id'=>$request->kelas_id,
+                // 'Foto'=>$request->Foto,
+                // 'kelas_id'=>$request->kelas_id,
                 'Jurusan'=>$request->Jurusan,
-                'No_Handphone'=>$request->No_Handphone,
-                'Email'=>$request->Email,
-                'Tanggal_Lahir'=>$request->Tanggal_Lahir,
+                // 'No_Handphone'=>$request->No_Handphone,
+                // 'Email'=>$request->Email,
+                // 'Tanggal_Lahir'=>$request->Tanggal_Lahir,
             ]
             ));
     }
@@ -86,9 +87,19 @@ class MahasiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa->update([
+            'Nim'=>$request->Nim,
+            'Nama'=>$request->Nama,
+            'Foto'=>$request->Foto,
+            'kelas_id'=>$request->kelas_id,
+            'Jurusan'=>$request->Jurusan,
+            'No_Handphone'=>$request->No_Handphone,
+            'Email'=>$request->Email,
+            'Tanggal_Lahir'=>$request->Tanggal_Lahir,
+        ]);
+        return new MahasiswaResource($mahasiswa);
     }
 
     /**
