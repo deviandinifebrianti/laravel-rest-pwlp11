@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\ApiAuthController;
+// use app\Http\Controllers\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +22,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route:: get('hello', function(){
-    $data=["message"=>"hello word"];
-    return response()->json($data);
-});
+// Route:: get('hello', function(){
+//     $data=["message"=>"hello word"];
+//     return response()->json($data);
+// });
 
-Route:: get('hello', function(){
-    return "hello word";
-});
+// Route:: get('hello', function(){
+//     return "hello word";
+// });
 
 Route::apiResource('/mahasiswa',MahasiswaController::class);
+
+
+Route::post('/login',[ApiAuthController::class,'login']);
