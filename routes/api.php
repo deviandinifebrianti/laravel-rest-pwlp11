@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\ApiAuthController;
-// use app\Http\Controllers\Auth;
+
 
 
 /*
@@ -18,9 +18,9 @@ use App\Http\Controllers\ApiAuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 // Route:: get('hello', function(){
 //     $data=["message"=>"hello word"];
@@ -31,7 +31,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return "hello word";
 // });
 
-Route::apiResource('/mahasiswa',MahasiswaController::class);
+// Route::apiResource('/mahasiswa',MahasiswaController::class);
 
 
 Route::post('/login',[ApiAuthController::class,'login']);
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::apiResource('/mahasiswa', MahasiswaController::class);
+    Route::get('/logout',[ApiAuthController::class, 'logout']);
+});
